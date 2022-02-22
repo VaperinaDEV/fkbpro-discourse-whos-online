@@ -1,0 +1,118 @@
+@import "discourse-whos-online-var-mixin";
+
+// Discourse Whos Online Custom
+
+// Whos Online Avatar Flair
+
+#whos-online {
+  display: inline-flex;
+  align-items: center;
+  color: var(--primary-high);
+  max-width: calc(100% - 3em);
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 0.75em 2em 0.75em 1em;
+  .mobile-view & {
+    padding: 0 2em 16px 1em;
+  }
+  &.collapsed {
+    a {
+      margin-left: 0.35em;
+    }
+    &:hover a {
+      margin-left: 0.35em;
+      &:first-of-type {
+        margin-left: 0.35em;
+      }
+    }
+  }
+  a {
+    margin-left: 0.35em;
+  }
+  span {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    margin-left: 1em;
+    margin-right: 0.15em;
+    font-weight: 600;
+    &:before {
+      content: '';
+      position: absolute;
+      border: 3px solid var(--success);
+      height: 15px;
+      width: 15px;
+      border-radius: 50%;
+      margin-left: -1.6em;
+      animation: online 1.35s ease-out infinite;
+      -moz-animation: online 1.35s ease-out infinite;
+      -webkit-animation: online 1.35s ease-out infinite;
+      opacity: 0.0;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background-color: var(--success);
+      border-radius: 50%;
+      margin-left: -1.4em;
+    }
+  }
+}
+
+// Online Dot
+
+.whos-online-flair-prototype {
+  display: block;
+  position: absolute;
+  content: "";
+  border-radius: 50%;
+  background-color: var(--success);
+  border: 4px solid var(--secondary);
+  pointer-events: none;
+  z-index: 1;
+}
+
+html.whos-online-flair {
+  #user-card.user-online .user-card-avatar::before {
+    @extend .whos-online-flair-prototype;
+    @include online-user-dot(86px, 86px, 20px, 20px);
+  }
+
+  .topic-avatar.user-online::before {
+    @extend .whos-online-flair-prototype;
+    @include online-user-dot(39px, 39px, 14px, 14px);
+    margin-top: 15px;
+    border: 3px solid var(--fkbpro-bg);
+  }
+
+  &.mobile-view .topic-avatar.user-online::before {
+    @include online-user-dot(30px, 30px, 10px, 10px);
+    margin-top: 0;
+    border: 2px solid var(--secondary);
+  }
+
+  .topic-map .avatars div {
+    // Add some -spacing to the avatars
+    margin-left: 0;
+  }
+
+  body.user-page-online
+    .about:not(.collapsed-info)
+    .primary
+    .user-profile-avatar::before {
+    @extend .whos-online-flair-prototype;
+    @include online-user-dot(86px, 86px, 20px, 20px);
+  }
+
+  body.user-page-online .collapsed-info .primary::before {
+    @extend .whos-online-flair-prototype;
+    @include online-user-dot(30px, 30px, 10px, 10px);
+    border: 2px solid var(--secondary);
+  }
+}
+
+#whos-online::-webkit-scrollbar {
+  display: none;
+}

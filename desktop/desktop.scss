@@ -1,0 +1,27 @@
+// Discourse Whos Online Custom
+
+// Whos online
+
+@media (min-width: 1101px) {
+  #whos-online {
+    position: fixed;
+    top: 10px;
+    height: 41px;
+    padding: 0 2em 0 1em;
+    z-index: z("header");
+    background: var(--fkbpro-secondary);
+    border-radius: $br-em;
+    max-width: calc(600px - 3em);
+  }
+  body {
+    &.navigation-topics,
+    &.navigation-categories,
+    &.tags-page,
+    &[class*="category-"]:not(.archetype-regular):not(.archetype-banner) {
+      .user-card {
+        margin-top: 10px;
+        z-index: z("header");
+      }
+    }
+  }
+}
