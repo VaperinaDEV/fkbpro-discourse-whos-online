@@ -1,11 +1,13 @@
 border_radius_em:
   type: enum
-  default: 1em
+  default: 1.5em
   choices:
     - 0em
     - 0.25em
     - 0.5em
     - 0.75em
     - 1em
+    - 1.25em
+    - 1.5em
   description:
     en: "Highly rounded corners. We use it on online users header bakcground."
